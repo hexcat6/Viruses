@@ -92,3 +92,13 @@ mkdir -p ~/.ssh
 touch ~/.ssh/authorized_keys
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 
+Play audio files with afplay command.
+example: afplay file.mp3
+
+
+Block a dns:
+
+Add the following line to the file /etc/hosts
+
+127.0.0.1 exampledns.com
+
