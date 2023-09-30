@@ -102,3 +102,12 @@ Add the following line to the file /etc/hosts
 
 127.0.0.1 exampledns.com
 
+Beep the terminal:
+
+To beep the terminal execute this command 
+
+echo -ne '\007'
+
+and to spam the terminal with beeps
+
+while :; do; echo -ne '\007'; done
